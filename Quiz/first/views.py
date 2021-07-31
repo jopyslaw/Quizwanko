@@ -2,8 +2,8 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from django.shortcuts import render, get_object_or_404, HttpResponse
-from .models import Category, Questions
+from django.shortcuts import render
+from .models import Category, Question
 from random import choice
 
 # Create your views here.
@@ -24,7 +24,7 @@ def register(request):
 
 def select_category(request, id): 
     category = Category.objects.get(pk=id)
-    questions = Questions.objects.all().filter(category=category)
+    questions = Question.objects.all().filter(category=category)
     data = {'questions':questions, 'category': category}
     return render(request, "first/quiz.html", data)
 
@@ -34,7 +34,7 @@ def check_answers(request):
     data = request.POST
     category = Category.objects.get(category=data['category'])
     id_cat = category.id
-    good_answer = Questions.objects.values().filter(category_id=id_cat)
+    good_answer = Question.objects.values().filter(category_id=id_cat)
     new_data = data.dict()
     for i in good_answer:
         key = i['id']
@@ -55,7 +55,7 @@ def contact(request):
     return render(request, "first/contact.html")
 
 def random(request): #Wyświetla 10 randomowych pytań z bazy danych
-    all_questions = Questions.objects.all().values()
+    all_questions = Question.objects.all().values()
     new_list = []
     i = 0
     while i < 5:
@@ -76,7 +76,7 @@ def check_answers_random(request):
     new_data.pop('category')
     new_data.pop('csrfmiddlewaretoken')
     for i in new_data.keys():
-        question = Questions.objects.values('good_anwer').get(id=i)
+        question = Question.objects.values('good_anwer').get(id=i)
         if question['good_anwer'] == new_data[f'{i}']:
             pkt += 1
         else:

@@ -1,15 +1,56 @@
-{% load 'static' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="pl">
     <head>
         <meta charset="utf-8">
+        <link rel="icon" href="{% static 'first/img/favicon.png' %}">
         <meta name="author" content="Konrad Jop">
-        <link rel="stylesheet" href="{%  %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'first/css/style.css' %}">
+        
     </head>
     <body>
-        {% block header %}
-        {% endblock %}
-        {% block content %}
-        {% endblock %}
+        <header>
+            <nav class="navbar navbar-dark bg-primary rounded-1 m-3 navbar-expand-md">
+                <a class="navbar-brand" href="#"><img src="{% static 'first/img/logo.png' %}" class="d-inline-block mx-2 align-middle" alt="Logo">Quizwanko.pl</a>
+                <button class="navbar-toggler me-4" type="button" data-bs-toggle="collapse" data-bs-target="#main_menu" aria-controls="main_menu" aria-expanded="false" aria-label="navigation-switch">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="main_menu">
+                    <ul class="navbar-nav ms-2 me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'main' %}">Start</a>
+                        </li>
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false" id="sub_menu">Tryby gry</a>
+                            <div class="dropdown-menu" aria-labelledby="sub_menu" aria-haspopup="true">
+                                <a class="dropdown-item" href="{% url 'category' %}">Kategorie</a>
+                                <a class="dropdown-item" href="{% url 'random' %}">Losowe pytania</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'author' %}">O autorze</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contact' %}">Kontakt</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav mx-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Rejstracja</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Zaloguj się</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <footer>
+            Strona w trakcie budowy
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
 </html>
