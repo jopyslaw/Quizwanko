@@ -1,1 +1,33 @@
 {% extends 'first/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container bg-primary rounded">
+        <header>
+            <h1 class="text-center">Wyniki</h1>
+            <hr>
+        </header>
+        <div class="row">
+            <div class="col-md-12 text-center mb-2">
+                <h1>Brawo!!!!</h1> 
+                <span style="font-size: 1em;">Odpowiedziałeś poprawnie na {{points}} z {{question_counter}} odpowiedzi</span>
+            </div>
+            <div class="col-md-12 my-2 text-center">
+                <img class="img-fluid" src="{% static 'first/img/zdj.gif' %}">
+            </div>
+            <hr>
+            <h1 class="text-center">Zapisz swój wynik do tablicy wyników</h1>
+            <div class="col-md-6">
+                <form action="{% url 'leaderboard' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" class="visibility-hidden" id="cat" name="category" value="{{category.category}}">
+                    <input type="hidden" class="visibility-hidden" id="pt" name="points" value="{{points}}">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Nazwa użytkownika</label>
+                        <input type="text" id="username" name="username" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-dark mb-2">Zapisz się w tablicy wyników</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

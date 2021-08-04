@@ -1,6 +1,7 @@
 body
 {
     background-color: rgb(41, 41, 41);
+    color: white;
 }
 
 footer
@@ -9,3 +10,83 @@ footer
     color: white;
     font-size:  15px;
 }
+
+.github
+{
+    background-color: rgb(36, 36, 36);
+    transition-duration: 0.5s;
+}
+
+.twitter
+{
+    background-color: #1DA1F2;
+    transition-duration: 0.5s;
+}
+
+.facebook
+{
+    background-color: #4267B2;
+    transition-duration: 0.5s;
+}
+
+.linkdln
+{
+    background-color: #0e76a8;
+    transition-duration: 0.5s;
+}
+
+.github:hover
+{
+    background-color: rgb(61, 61, 61);
+}
+
+.twitter:hover
+{
+    background-color: #58bfff;
+}
+
+.facebook:hover
+{
+    background-color: #4f7dda;
+}
+
+.linkdln:hover
+{
+    background-color: #0f9bdb;
+}
+
+.my_links a
+{
+    text-decoration: none;
+    color: white;
+    font-size: 450%;
+}
+
+hr 
+{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.category_links a
+{
+    text-decoration: none;
+    color: black;
+}
+
+.category_blocks
+{
+    font-size: 1em;
+    color: black;
+    background-color: white;
+    transition-duration: 0.5s;
+    min-height: 5em;
+}
+
+.category_blocks:hover
+{
+    background-color: rgb(184, 184, 184);
+}
+

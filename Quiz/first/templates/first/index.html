@@ -1,1 +1,28 @@
 {% extends 'first/base.html' %}
+
+{% block content %}
+    <div class="container bg-primary rounded-1">
+        <header>
+            <h1 class="text-center">Strona Główna</h1>
+            <hr>
+        </header>
+        <div class="row">
+            <div class="col-md-5 offset-md-1"><!-- Leaderboard Box -->
+                <h1 class="text-center">Leaderboard</h1>
+                {% for i in leaders %}
+                    <div class="col-md-12">
+                        <div class="col-md-7 col-sm-8 rounded border border-white mt-2 mx-auto">
+                            <span class="ms-1">{{forloop.counter}}. {{i.username}} &nbsp;&nbsp; kategoria &nbsp;&nbsp; {{i.points}} pkt.</span>
+                        </div>
+                    </div>
+                {% endfor %}        
+            </div>
+            <div class="col-md-5">
+                <h1 class="text-center">Ciekawostki</h1>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar, metus id consequat mattis, nulla massa rutrum quam, quis mollis ligula justo eget turpis. Vivamus at tellus vitae nunc aliquet dictum sed non lacus. Vestibulum venenatis dictum metus sit amet sodales. Curabitur diam tortor, placerat vitae erat eget, scelerisque iaculis est. Phasellus quis malesuada mauris. Aliquam imperdiet consequat luctus. Mauris blandit rutrum malesuada. Nulla et magna tincidunt, facilisis nisl ac, elementum tellus. Sed vel justo venenatis leo ornare mattis eu vitae nisi. Ut eu molestie ligula, at pretium neque. Donec eget velit porta, mattis erat vitae, feugiat turpis. Suspendisse vitae diam consectetur, posuere ipsum ac, efficitur enim. Pellentesque placerat hendrerit mauris, ut fringilla tellus sollicitudin condimentum. Vivamus rutrum eget odio id posuere. Suspendisse aliquet ullamcorper euismod. Duis condimentum lorem nec finibus convallis.
+
+                 Maecenas posuere, nibh sed ultricies iaculis, urna leo euismod massa, ac eleifend dolor erat ut enim. Etiam ac eros tristique, pretium augue et, commodo neque. Integer blandit commodo tincidunt. Nulla sollicitudin augue quam. Phasellus egestas aliquet tortor vel tristique. Quisque congue ut magna a fermentum. Etiam aliquam pulvinar libero, in mollis risus. Duis libero velit, tincidunt vitae lobortis at, malesuada in ligula.
+            </div>
+        </div>
+    </div>
+{% endblock %}

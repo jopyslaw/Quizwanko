@@ -1,1 +1,37 @@
 {% extends 'first/base.html' %}
+
+{% block content %}
+    <div class="container bg-primary rounded">
+        <header>
+            <h1 class="text-center">Kontakt</h1>
+        </header>
+        <div class="row my_links">
+            <div class="col-md-12 mb-2">
+                Kontakt:<br>
+                Imię: Konrad<br>
+                Nazwisko: Jop<br>
+                E-mail: jopkonrad91@gmail.com<br>
+            </div>
+            <div class="col-md-4 offset-md-1 rounded mb-2 github">
+                <div class="col-md-12">
+                    <a href="#"><i class="icon-github-circled"></i>GitHub</a>
+                </div>
+            </div>
+            <div class="col-md-4 offset-md-2 rounded mb-2 linkdln">
+                <div class="col-md-12">
+                    <a href="#"><i class="icon-linkedin"></i>Linkedin</a>
+                </div>
+            </div>
+            <div class="col-md-4 offset-md-1 rounded mb-2 twitter">
+                <div class="col-md-12">
+                    <a href="#"><i class="icon-twitter"></i>Twitter</a>
+                </div>
+            </div>
+            <div class="col-md-4 offset-md-2 rounded mb-2 facebook">
+                <div class="col-md-12">
+                    <a href="#"><i class="icon-facebook"></i>Facebook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -24,7 +24,7 @@ class Question(models.Model):
 
 class LeaderBoard(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    username = models.CharField(max_length=150)
+    username = models.CharField(max_length=150, unique=True)
     points = models.IntegerField()
 
     def __str__(self):

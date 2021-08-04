@@ -1,1 +1,48 @@
 {% extends 'first/base.html' %}
+
+{% block content %}
+    <div class="container bg-secondary">
+        <header>
+            <h1 class="text-center">{{category.category}}</h1>
+            <hr>
+        </header>
+        <div class="row">
+            <form action="{% url 'check_answers' %}" method="GET">
+                <div class="col-md-12">
+                    <input type="hidden" id="cat" name="category" value="{{category.category}}">
+                </div>
+                {% for i in questions %}
+                    <div class="col-md-12">
+                        {{i.question}}
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="{{i.id}}" id="answer" value="{{i.answer_a}}" checked>
+                        <label class="form-check-label" for="answer">
+                            {{i.answer_a}}
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="{{i.id}}" id="answer" value="{{i.answer_b}}">
+                        <label class="form-check-label" for="answer">
+                            {{i.answer_b}}
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="{{i.id}}" id="answer" value="{{i.answer_c}}">
+                        <label class="form-check-label" for="answer">
+                            {{i.answer_c}}
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="{{i.id}}" id="answer" value="{{i.answer_d}}">
+                        <label class="form-check-label" for="answer">
+                            {{i.answer_d}}
+                        </label>
+                    </div>
+                    <hr>
+                {% endfor %}
+                <button type="submit" class="btn btn-dark my-2">Zakończ Quiz</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

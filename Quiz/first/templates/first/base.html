@@ -7,13 +7,14 @@
         <meta name="author" content="Konrad Jop">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'first/css/css/fontello.css' %}">
         <link rel="stylesheet" href="{% static 'first/css/style.css' %}">
         
     </head>
     <body>
         <header>
             <nav class="navbar navbar-dark bg-primary rounded-1 m-3 navbar-expand-md">
-                <a class="navbar-brand" href="#"><img src="{% static 'first/img/logo.png' %}" class="d-inline-block mx-2 align-middle" alt="Logo">Quizwanko.pl</a>
+                <a class="navbar-brand" href="{% url 'main' %}"><img src="{% static 'first/img/logo.png' %}" class="d-inline-block mx-2 align-middle" alt="Logo">Quizwanko.pl</a>
                 <button class="navbar-toggler me-4" type="button" data-bs-toggle="collapse" data-bs-target="#main_menu" aria-controls="main_menu" aria-expanded="false" aria-label="navigation-switch">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -22,7 +23,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'main' %}">Start</a>
                         </li>
-                        <li class="nav-item dropdown active">
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false" id="sub_menu">Tryby gry</a>
                             <div class="dropdown-menu" aria-labelledby="sub_menu" aria-haspopup="true">
                                 <a class="dropdown-item" href="{% url 'category' %}">Kategorie</a>
@@ -48,9 +49,19 @@
                 </div>
             </nav>
         </header>
-        <footer>
-            Strona w trakcie budowy
-        </footer>
+        <main>
+            <section class="main_content">
+                {% block content %}
+                {% endblock %}
+            </section>
+        </main>
+        <div class="container">
+            <div class="row">
+                <footer class="col-md-12 mt-3 bg-primary rounded">
+                    Strona w trakcie budowy
+                </footer>
+            </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -3,13 +3,15 @@ from django.shortcuts import render
 # Create your views here.
 
 from django.shortcuts import render
-from .models import Category, Question
+from .models import Category, LeaderBoard, Question
 from random import choice
 
 # Create your views here.
 
-def main(request):
-    return render(request,"first/index.html")
+def main(request):#do naprawy
+    leaders = LeaderBoard.objects.all().values()
+    data = {'leaders': leaders}
+    return render(request,"first/index.html", data)
 
 def category(request):
     category = Category.objects.all()
@@ -31,7 +33,7 @@ def select_category(request, id):
 
 def check_answers(request):
     pkt = 0
-    data = request.POST
+    data = request.GET
     category = Category.objects.get(category=data['category'])
     id_cat = category.id
     good_answer = Question.objects.values().filter(category_id=id_cat)
@@ -39,11 +41,12 @@ def check_answers(request):
     for i in good_answer:
         key = i['id']
         send_answer = new_data[str(key)]
-        if send_answer == i['good_anwer']:
+        if send_answer == i['good_answer']:
             pkt += 1
         else:
             pkt += 0
-    points = {'points': pkt}
+    question_len = len(new_data)-1
+    points = {'points': pkt, 'question_counter': question_len, 'category':category}
     return render(request, "first/answers.html", points)
 
 
@@ -55,6 +58,7 @@ def contact(request):
     return render(request, "first/contact.html")
 
 def random(request): #Wyświetla 10 randomowych pytań z bazy danych
+    category = Category.objects.get(category="Random")
     all_questions = Question.objects.all().values()
     new_list = []
     i = 0
@@ -65,23 +69,31 @@ def random(request): #Wyświetla 10 randomowych pytań z bazy danych
         else:
             new_list.append(check)
             i += 1
-    data = { 'questions': new_list}
-    return render(request, "first/random.html", data)
+    data = { 'questions': new_list, 'category':category}
+    return render(request, "first/quiz.html", data)
 
 
-def check_answers_random(request):
-    pkt = 0
+def leaderboard(request):
     data = request.POST
-    new_data = data.dict()
-    new_data.pop('category')
-    new_data.pop('csrfmiddlewaretoken')
-    for i in new_data.keys():
-        question = Question.objects.values('good_anwer').get(id=i)
-        if question['good_anwer'] == new_data[f'{i}']:
-            pkt += 1
-        else:
-            pkt += 0
-    points = {'points': pkt}
-    return render(request, "first/answers.html", points)
+    category = Category.objects.get(category=data['category'])
+    username = data['username']
+    points = data['points']
+    person = LeaderBoard(category=category, username=username, points=points)
+    person.save()
+    return render(request, 'first/index.html')
+
+#def check_answers_random(request):
+#    pkt = 0
+#    data = request.POST
+#    new_data = data.dict()
+#    new_data.pop('category')
+#    for i in new_data.keys():
+#        question = Question.objects.values('good_anwer').get(id=i)
+#        if question['good_anwer'] == new_data[f'{i}']:
+#            pkt += 1
+#        else:
+#            pkt += 0
+#    points = {'points': pkt}
+#    return render(request, "first/answers.html", points)
 
 
