@@ -28,7 +28,7 @@ urlpatterns = [
     path('author', author, name='author'),
     path('contact', contact, name='contact'),
     path('random', random, name='random'),
-    path('random/check_answers', check_answers, name='check_answers'),
+    path('random/check_answers', check_answers_random, name='check_answers_random'),
     path('leaderboard', leaderboard, name="leaderboard"),
     #path('accounts', include('django.contrib.auth.urls'))
 ]

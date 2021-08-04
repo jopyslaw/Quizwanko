@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 # Create your views here.
 
@@ -9,12 +9,12 @@ from random import choice
 # Create your views here.
 
 def main(request):#do naprawy
-    leaders = LeaderBoard.objects.all().values()
+    leaders = LeaderBoard.objects.all().values().order_by('-points')[:10]
     data = {'leaders': leaders}
     return render(request,"first/index.html", data)
 
 def category(request):
-    category = Category.objects.all()
+    category = Category.objects.all().exclude(category__iexact = 'Random')
     data = {'category':category}
     return render(request, "first/category.html", data)
 
@@ -70,7 +70,7 @@ def random(request): #Wyświetla 10 randomowych pytań z bazy danych
             new_list.append(check)
             i += 1
     data = { 'questions': new_list, 'category':category}
-    return render(request, "first/quiz.html", data)
+    return render(request, "first/random.html", data)
 
 
 def leaderboard(request):
@@ -80,20 +80,21 @@ def leaderboard(request):
     points = data['points']
     person = LeaderBoard(category=category, username=username, points=points)
     person.save()
-    return render(request, 'first/index.html')
+    return redirect('main')
 
-#def check_answers_random(request):
-#    pkt = 0
-#    data = request.POST
-#    new_data = data.dict()
-#    new_data.pop('category')
-#    for i in new_data.keys():
-#        question = Question.objects.values('good_anwer').get(id=i)
-#        if question['good_anwer'] == new_data[f'{i}']:
-#            pkt += 1
-#        else:
-#            pkt += 0
-#    points = {'points': pkt}
-#    return render(request, "first/answers.html", points)
+def check_answers_random(request):
+    pkt = 0
+    data = request.GET
+    new_data = data.dict()
+    new_data.pop('category')
+    for i in new_data.keys():
+        question = Question.objects.values('good_answer').get(id=i)
+        if question['good_answer'] == new_data[f'{i}']:
+            pkt += 1
+        else:
+            pkt += 0
+    len_data = len(new_data)
+    points = {'points': pkt, 'question_counter': len_data}
+    return render(request, "first/answers.html", points)
 
 
