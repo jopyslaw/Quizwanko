@@ -16,7 +16,7 @@
                         {{i.question}}
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="{{i.id}}" id="answer" value="{{i.answer_a}}" checked>
+                        <input class="form-check-input" type="radio" name="{{i.id}}" id="answer" value="{{i.answer_a}}">
                         <label class="form-check-label" for="answer">
                             {{i.answer_a}}
                         </label>
@@ -38,6 +38,10 @@
                         <label class="form-check-label" for="answer">
                             {{i.answer_d}}
                         </label>
+                    </div>
+                    <div class="form-check visually-hidden">
+                        <input class="form-check-input" type="radio" name="{{i.id}}" id="answer" value="None" checked>
+                        <label class="form-check-label" for="answer"></label>
                     </div>
                     <hr>
                 {% endfor %}

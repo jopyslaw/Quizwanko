@@ -1,14 +1,12 @@
 from django.shortcuts import redirect, render
 
 # Create your views here.
-
-from django.shortcuts import render
 from .models import Category, LeaderBoard, Question
 from random import choice
 
 # Create your views here.
 
-def main(request):#do naprawy
+def main(request):
     leaders = LeaderBoard.objects.all().values().order_by('-points')[:10]
     data = {'leaders': leaders}
     return render(request,"first/index.html", data)
@@ -84,6 +82,7 @@ def leaderboard(request):
 
 def check_answers_random(request):
     pkt = 0
+    category = Category.objects.get(category="Random")
     data = request.GET
     new_data = data.dict()
     new_data.pop('category')
@@ -94,7 +93,7 @@ def check_answers_random(request):
         else:
             pkt += 0
     len_data = len(new_data)
-    points = {'points': pkt, 'question_counter': len_data}
+    points = {'points': pkt, 'question_counter': len_data, 'category':category}
     return render(request, "first/answers.html", points)
 
 
