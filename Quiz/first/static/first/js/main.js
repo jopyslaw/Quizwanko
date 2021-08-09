@@ -1,4 +1,13 @@
-function hello()
+function send_form(form)
 {
-    alert('Pomyślnie wylogowano')
+    form = document.getElementById("quiz_form");
+    var user_choice = confirm("Czy na pewno chcesz zakończyć Quiz ?");
+    if(user_choice)
+    {
+        return form.confirm();
+    }
+    else
+    {
+        return false;
+    }
 }

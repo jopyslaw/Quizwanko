@@ -32,6 +32,7 @@ def select_category(request, id):
 def check_answers(request):
     pkt = 0
     data = request.GET
+    print(data)
     category = Category.objects.get(category=data['category'])
     id_cat = category.id
     good_answer = Question.objects.values().filter(category_id=id_cat)

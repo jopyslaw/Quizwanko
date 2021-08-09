@@ -31,6 +31,4 @@ urlpatterns = [
     path('random', random, name='random'),
     path('random/check_answers', check_answers_random, name='check_answers_random'),
     path('leaderboard', leaderboard, name="leaderboard"),
-    path('accounts/', include('accounts.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
 ]

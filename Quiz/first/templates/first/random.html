@@ -7,7 +7,7 @@
             <hr>
         </header>
         <div class="row">
-            <form action="{% url 'check_answers_random' %}" method="GET">
+            <form action="{% url 'check_answers_random' %}" method="GET" onsubmit="return confirm('Czy na pewno chcesz wysłać Quiz ?');">
                 <div class="col-md-12">
                     <input type="hidden" id="cat" name="category" value="{{category.category}}">
                 </div>
