@@ -1,9 +1,31 @@
 {% extends 'first/base.html' %}
 
 {% block content %}
-    <div class="container bg-primary rounded">
+    <div class="container bg-primary rounded ">
         <header>
-            <h1 class="text-center">Sekcja w trakcie budowy !!!!</h1>
+            <h1 class="text-center">Zaloguj się</h1>
         </header>
+        <div class="row">
+            <form method="POST" action="{% url 'check_login' %}">
+                {% csrf_token %}
+                <div class="col md-6">
+                    <div class="col-md-3 mx-auto">
+                        <label for="username" class="form-label">Nazwa użytkownika</label>
+                        <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameHelp">
+                    </div>
+                    <div class="col-md-3 mb-2 mx-auto">
+                        <label for="password" class="form-label">Hasło</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                        <div class="col-md-12 rounded bg-secondary my-2 ps-1">
+                            {% if error != None %}
+                                {{error}}
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-secondary my-1 mx-auto">Zaloguj się</button>
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock %}

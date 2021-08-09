@@ -31,4 +31,6 @@ urlpatterns = [
     path('random', random, name='random'),
     path('random/check_answers', check_answers_random, name='check_answers_random'),
     path('leaderboard', leaderboard, name="leaderboard"),
+    path('login/check_login', check_login, name="check_login"),
+    path('login/logout', logout, name="logout"),
 ]

@@ -1,8 +1,9 @@
 from django.shortcuts import redirect, render
-
-# Create your views here.
 from .models import Category, LeaderBoard, Question
 from random import choice
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as login_auth
+from django.contrib.auth import logout as logout_auth
 
 # Create your views here.
 
@@ -98,3 +99,18 @@ def check_answers_random(request):
     return render(request, "first/answers.html", points)
 
 
+def check_login(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login_auth(request, user)
+        return redirect('main')
+    else:
+        data = {'error': 'Nieprawidłowe hasło lub login'}
+        return render(request, "first/login.html", data)
+
+
+def logout(request):
+    logout_auth(request)
+    return redirect('main')
