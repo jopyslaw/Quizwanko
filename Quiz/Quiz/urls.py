@@ -33,4 +33,9 @@ urlpatterns = [
     path('leaderboard', leaderboard, name="leaderboard"),
     path('login/check_login', check_login, name="check_login"),
     path('login/logout', logout, name="logout"),
+    path('register/register_user', register_user, name="register_user"),
+    path('login/edit_account', edit_account, name="edit_account"),
+    path('login/edit_account/change_user_data', change_user_data, name="change_user_data"),
+    path('login/edit_account/change_user_password', change_user_password, name="change_user_password"),
+    path('login/edit_account/delete_account', delete_account, name="delete_account"),
 ]

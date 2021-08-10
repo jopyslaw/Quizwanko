@@ -40,8 +40,13 @@
 
                     <ul class="navbar-nav mx-2">
                         {% if user.is_authenticated %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'register' %}">Witaj {{user.username}}</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false" id="user_menu">Witaj {{user.username}}</a>
+                                <div class="dropdown-menu" aria-labelledby="user_menu" aria-haspopup="true">
+                                    <a class="dropdown-item" href="{% url 'edit_account' %}">Edytuj konto</a>
+                                    <a class="dropdown-item" href="#">Dodaj pytanie</a>
+                                    <a class="dropdown-item" href="#">Tablica wyników</a>
+                                </div>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'logout' %}">Wyloguj się</a>

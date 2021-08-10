@@ -3,7 +3,33 @@
 {% block content %}
     <div class="container bg-primary rounded">
         <header>
-            <h1 class="text-center">Sekcja w trakcie budowy !!!!</h1>
+            <h1 class="text-center">Zarejstruj się</h1>
         </header>
+        <div class="row">
+            <form method="POST" action="{% url 'register_user' %}">
+                {% csrf_token %}
+                <div class="col md-6">
+                    <div class="col-md-3 mx-auto">
+                        <label for="register_username" class="form-label">Nazwa użytkownika</label>
+                        <input type="text" class="form-control" id="register_username" name="username" aria-describedby="usernameHelp">
+                    </div>
+                    <div class="col-md-3 mb-2 mx-auto">
+                        <label for="register_password" class="form-label">Hasło</label>
+                        <input type="password" class="form-control" id="register_password" name="password">
+                        <div class="col-md-12 rounded bg-secondary my-2 ps-1">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    {% if message.extra_tags == 'register_status' %}
+                                        {{message}}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-secondary my-1 mx-auto">Zarejstruj się</button>
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'first/base.html' %}
+
+{% block content %}
+    <div class="container bg-primary rounded">
+        <header>
+            <h1 class="text-center">Edytuj konto</h1>
+            <hr>
+        </header>
+        <div class="row">
+            <div class="col-md-12 ">
+                <h2 class="text-center">Dane osobowe:</h1>
+                <form method="POST" action="{% url 'change_user_data' %}">
+                    {% csrf_token %}
+                    <div class="col-md-6 mx-auto">
+                        <label for="firstname" class="form-label">Imię</label>
+                        <input type="text" class="form-control" id="firstname" name="firstname" aria-describedby="firstnameHelp">
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <label for="lastname" class="form-label">Nazwisko</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname" aria-describedby="lastnameHelp">
+                        <button class="btn btn-secondary my-2" type="submit">Zapisz</button><br>
+                        {% if messages %}
+                            {% for message in messages %}
+                                {% if message.extra_tags == 'profile_update' %}
+                                    {{message}}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+            <hr>
+            <div class="col-md-12">
+                <h2 class="text-center">Zmiana hasła</h2>
+                <form method="POST" action="{% url 'change_user_password' %}"> 
+                    {% csrf_token %}
+                    <div class="col-md-6 mx-auto">
+                        <label for="old_password" class="form-label">Stare hasło</label>
+                        <input type="password" class="form-control" id="old_password" name="old_password">
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <label for="new_name" class="form-label">Nowe hasło</label>
+                        <input type="password" class="form-control" id="new_password" name="new_password">
+                        <button class="btn btn-secondary my-2" type="submit">Zmień hasło</button>
+                        {% if messages %}
+                            {% for message in messages %}
+                                {% if message.extra_tags == 'change_password' %}
+                                    {{message}}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+            <hr>
+            <div class="col-md-12">
+                <h2 class="text-center">Usuń konto</h2>
+                <form method="POST" action="{% url 'delete_account' %}" onsubmit="return confirm('Czy na pewno chcesz usunąć konto ?');">
+                    {% csrf_token %}
+                    <div class="col-md-6 mx-auto">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="true" id="delete_account" name="delete_account">
+                            <label class="form-check-label" for="delete_account">
+                                Czy usunąć konto ?
+                            </label>
+                        </div>
+                        <button class="btn btn-secondary my-2" type="submit">Usuń konto</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

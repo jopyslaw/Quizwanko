@@ -1,9 +1,12 @@
+from django.core.checks import messages
 from django.shortcuts import redirect, render
 from .models import Category, LeaderBoard, Question
 from random import choice
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_auth
 from django.contrib.auth import logout as logout_auth
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 # Create your views here.
 
@@ -107,10 +110,67 @@ def check_login(request):
         login_auth(request, user)
         return redirect('main')
     else:
-        data = {'error': 'Nieprawidłowe hasło lub login'}
-        return render(request, "first/login.html", data)
+        messages.error(request, "Nie prawidłowe hasło lub nazwa użytkownika", extra_tags="login_status")
+        return redirect('login')
 
 
 def logout(request):
     logout_auth(request)
     return redirect('main')
+
+
+def register_user(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    try:
+        user = User.objects.create_user(username=username, password=password)
+        user.save()
+        messages.success(request, "Pomyślnie założono konto", extra_tags="register_status")
+    except:
+        messages.error(request, "Taki użytkownik już istnieje", extra_tags="register_status")
+    return redirect('register')
+
+def edit_account(request):
+    return render(request, 'first/account.html')
+
+
+def change_user_data(request):
+    firstname = request.POST['firstname']
+    lastname = request.POST['lastname']
+    user = request.user
+    if request.user.is_authenticated:
+        user.first_name = firstname
+        user.last_name = lastname
+        user.save()
+        messages.success(request, "Profil został zaaktualizowany",extra_tags="profile_update")
+        return redirect('edit_account')
+    else:
+        return redirect('login')
+    
+
+
+def change_user_password(request):
+    old_password = request.POST['old_password']
+    new_password = request.POST['new_password']
+    user = request.user
+    if user.is_authenticated:
+        if user.check_password(old_password):
+            user.set_password(new_password)
+            user.save()
+            messages.success(request, "Hasło zostało zmienione", extra_tags="change_password")
+            return redirect('edit_account')
+        else:
+            messages.error(request, "Hasło nie zostało zmienione", extra_tags="change_password")
+            return redirect('edit_account')
+    else:
+        return redirect('login')
+
+def delete_account(request):
+    choice = request.POST['delete_account']
+    user = request.user
+    if user.is_authenticated:
+        if choice == 'true':
+            user.delete()
+            return redirect('main')
+    
+
