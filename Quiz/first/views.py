@@ -1,12 +1,14 @@
 from django.core.checks import messages
 from django.shortcuts import redirect, render
-from .models import Category, LeaderBoard, Question
+from .models import Category, LeaderBoard, Question, Users_question
 from random import choice
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_auth
 from django.contrib.auth import logout as logout_auth
 from django.contrib.auth.models import User
 from django.contrib import messages
+
+GROUPS_NAME = ['Moderators']
 
 # Create your views here.
 
@@ -172,5 +174,70 @@ def delete_account(request):
         if choice == 'true':
             user.delete()
             return redirect('main')
+
+
+def add_question(request):
+    category = Category.objects.all().exclude(category__iexact = 'Random')
+    data = {'category':category}
+    return render(request, "first/add_question.html", data)
+
+
+def add_this(request):
+    category = request.POST['category']
+    question = request.POST['question_area']
+    odp_a = request.POST['answer_a']
+    odp_b = request.POST['answer_b']
+    odp_c = request.POST['answer_c']
+    odp_d = request.POST['answer_d']
+    odp_good = request.POST['answer_good']
+    category_data = Category.objects.get(category=category)
+    question = Users_question(category=category_data, question=question, answer_a=odp_a, answer_b=odp_b, answer_c=odp_c, answer_d=odp_d, good_answer=odp_good)
+    question.save()
+    return redirect('add_question')
+
+
+def user_points(request):
+    username = request.user
+    data = LeaderBoard.objects.filter(username=username)
+    points_for_user = {'points':data}
+    return render(request, 'first/user_info.html', points_for_user)
+
+
+def check_questions(request):
+    if request.user.groups.filter(name__in=GROUPS_NAME).exists():
+        question = Users_question.objects.all()
+        data = {'question':question}
+        return render(request, 'first/check_questions.html', data)
+    else:
+        return redirect('main')
+
+
+def edit_question(request, id):
+    question = Users_question.objects.filter(pk=id).values()
+    for c in question:
+        category_id = c['category_id']
+    category = Category.objects.all().exclude(pk = category_id)
+    category.exclude(category__iexact="Random")
+    print(category)
+    question_category = Category.objects.filter(pk=category_id)
+    data = {'question':question, 'category':category, 'question_category':question_category}
+    return render(request, 'first/edit_question.html', data)
+
+
+def accept_question(request):
+    category = request.POST['category']
+    question = request.POST['question_area']
+    odp_a = request.POST['answer_a']
+    odp_b = request.POST['answer_b']
+    odp_c = request.POST['answer_c']
+    odp_d = request.POST['answer_d']
+    odp_good = request.POST['answer_good']
+    category_data = Category.objects.get(category=category)
+    question = Question(category=category_data, question=question, answer_a=odp_a, answer_b=odp_b, answer_c=odp_c, answer_d=odp_d, good_answer=odp_good)
+    question.save()
+    question_delete = Users_question.objects.get(question=question)
+    question_delete.delete()
+    return redirect('check_questions')
+
     
 

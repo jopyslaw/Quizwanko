@@ -1,0 +1,18 @@
+{% extends 'first/base.html' %}
+
+{% block content %}
+    <div class="container bg-primary rounded">
+        <header>
+            <h1 class="text-center">Pytania uzytkowników</h1>
+            <hr></hr>
+        </header>
+        <div class="row">
+            {% for q in question %}
+            <div class="col-md-11 user_question_color offset-1 ms-1 my-1">
+                <a href="{% url 'edit_question' q.id %}">{{q}}</a>
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -95,5 +95,14 @@ hr
     font-size: 0.5em;
 }
 
+.user_question_color a
+{
+    color: white;
+    text-decoration: none;
+}
 
+.user_question_color a:hover
+{
+    color:rgb(124, 11, 11);
+}
 

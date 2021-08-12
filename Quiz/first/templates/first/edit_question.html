@@ -1,0 +1,53 @@
+{% extends 'first/base.html' %}
+
+{% block content %}
+    <div class="container bg-primary rounded">
+        <header>
+            <h1 class="text-center">Edycja pytania</h1>
+        </header>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="POST" action="{% url 'accept_question' %}">
+                    {% csrf_token %}
+                    <div class="col-md-6 mx-auto">
+                        <select class="form-select" name="category" aria-label="Category_select">
+                            {% for c in question_category %}
+                            <option value="{{c.category}}" selected>{{c.category}}</option>
+                            {% endfor %}
+                            {% for cat in category %}
+                                <option value="{{cat}}">{{cat}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% for c in question %}
+                    <div class="col-md-6 mx-auto">
+                        <label for="question_area" class="form-label">Pytanie</label>
+                        <textarea class="form-control" id="question_area" name="question_area" rows="3" value="{{c.question}}">{{c.question}}</textarea>
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <label for="answer_a" class="form-label">Odp A</label>
+                        <input type="text" class="form-control" id="answer_a" name="answer_a" value="{{c.answer_a}}">
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <label for="answer_b" class="form-label">Odp B</label>
+                        <input type="text" class="form-control" id="answer_b" name="answer_b" value="{{c.answer_b}}">
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <label for="answer_c" class="form-label">Odp C</label>
+                        <input type="text" class="form-control" id="answer_c" name="answer_c" value="{{c.answer_c}}">
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <label for="answer_d" class="form-label">Odp D</label>
+                        <input type="text" class="form-control" id="answer_d" name="answer_d" value="{{c.answer_d}}">
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <label for="answer_good" class="form-label">Prawidłowa odpowiedź</label>
+                        <input type="text" class="form-control" id="answer_good" name="answer_good" value="{{c.good_answer}}">
+                        <button type="submit" class="btn btn-secondary my-2">Zaakceptuj pytanie</button>
+                    </div>
+                    {% endfor %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

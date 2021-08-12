@@ -22,6 +22,19 @@ class Question(models.Model):
         return self.question
 
 
+class Users_question(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    question = models.TextField()
+    answer_a = models.CharField(max_length=150)
+    answer_b = models.CharField(max_length=150)
+    answer_c = models.CharField(max_length=150)
+    answer_d = models.CharField(max_length=150)
+    good_answer = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.question
+
+
 class LeaderBoard(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     username = models.CharField(max_length=150, unique=True)

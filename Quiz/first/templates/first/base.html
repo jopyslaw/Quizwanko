@@ -44,8 +44,9 @@
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false" id="user_menu">Witaj {{user.username}}</a>
                                 <div class="dropdown-menu" aria-labelledby="user_menu" aria-haspopup="true">
                                     <a class="dropdown-item" href="{% url 'edit_account' %}">Edytuj konto</a>
-                                    <a class="dropdown-item" href="#">Dodaj pytanie</a>
-                                    <a class="dropdown-item" href="#">Tablica wyników</a>
+                                    <a class="dropdown-item" href="{% url 'add_question' %}">Dodaj pytanie</a>
+                                    <a class="dropdown-item" href="{% url 'user_points' %}">Tablica wyników</a>
+                                    <a class="dropdown-item" href="{% url 'check_questions' %}">Sprawdź pytania</a>
                                 </div>
                             </li>
                             <li class="nav-item">

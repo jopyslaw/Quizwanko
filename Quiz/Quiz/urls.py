@@ -38,4 +38,10 @@ urlpatterns = [
     path('login/edit_account/change_user_data', change_user_data, name="change_user_data"),
     path('login/edit_account/change_user_password', change_user_password, name="change_user_password"),
     path('login/edit_account/delete_account', delete_account, name="delete_account"),
+    path('login/add_question', add_question, name="add_question"),
+    path('login/add_question/add', add_this, name="add_this"),
+    path('login/user_points', user_points, name="user_points"),
+    path('login/check_questions', check_questions, name="check_questions"),
+    path('login/check_questions/<id>', edit_question, name="edit_question"),
+    path('login/accept_question', accept_question, name="accept_question"),
 ]

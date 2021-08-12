@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(Category)
 admin.site.register(Question)
 admin.site.register(LeaderBoard)
+admin.site.register(Users_question)

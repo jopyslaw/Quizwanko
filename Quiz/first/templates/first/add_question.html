@@ -1,0 +1,50 @@
+{% extends 'first/base.html' %}
+
+{% block content %}
+    <div class="container bg-primary rounded">
+        <header>
+            <h1 class="text-center">Dodaj pytanie</h1>
+            <hr>
+        </header>
+        <div class="row">
+            <div class="col-md-12 ">
+                <form method="POST" action="{% url 'add_this' %}">
+                    {% csrf_token %}
+                    <div class="col-md-6 mx-auto">
+                        <select class="form-select" name="category" aria-label="Category_select">
+                            <option selected>Wybierz kategorię</option>
+                            {% for cat in category %}
+                                <option value="{{cat}}">{{cat}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <label for="question_area" class="form-label">Pytanie</label>
+                        <textarea class="form-control" id="question_area" name="question_area" rows="3"></textarea>
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <label for="answer_a" class="form-label">Odp A</label>
+                        <input type="text" class="form-control" id="answer_a" name="answer_a" >
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <label for="answer_b" class="form-label">Odp B</label>
+                        <input type="text" class="form-control" id="answer_b" name="answer_b" >
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <label for="answer_c" class="form-label">Odp C</label>
+                        <input type="text" class="form-control" id="answer_c" name="answer_c" >
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <label for="answer_d" class="form-label">Odp D</label>
+                        <input type="text" class="form-control" id="answer_d" name="answer_d" >
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <label for="answer_good" class="form-label">Prawidłowa odpowiedź</label>
+                        <input type="text" class="form-control" id="answer_good" name="answer_good" >
+                        <button type="submit" class="btn btn-secondary my-2">Dodaj pytanie</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
